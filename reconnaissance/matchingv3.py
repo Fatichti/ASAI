@@ -254,7 +254,7 @@ def cropping(frame):
     if(roi != (0,0,0,0)):
         #Crop selected roi from raw image
         roi_cropped = img_raw[int(roi[1]):int(roi[1]+roi[3]), int(roi[0]):int(roi[0]+roi[2])]
-        #roi_cropped = img_raw[int(roi[0]):int(roi[0]+roi[2]), int(roi[1]):int(roi[1]+roi[3])]
+        #roi_cropped = img_raw[int(roi[1]+roi[3]):int(roi[1]), int(roi[0]+roi[2]):int(roi[0])]
 
         #show cropped image
         cv2.imshow("ROI", roi_cropped)

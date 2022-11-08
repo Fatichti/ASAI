@@ -1,24 +1,15 @@
-# echo-server.py
-
-import socket
+import socket                                               # On fait les importations nécessaires
 import sys, os
 
-sys.path.append("/home/fabienpi/Documents/UV_ASAI")
-from reconnaissance.visionCV import *
+HOST = "10.100.252.90"                                      # Adresse IP de celui qui va écouter, le serveur
+PORT = 6789                                                 # Port d'écoute
+LIMIT_DATA = 1024                                           # Limite de taille des données reçues en octets
+PATHIMG = "/home/fabienpi/Documents/UV_ASAI/data/"          # On défini un chemin vers un dossier
+FILENAME = PATHIMG + "templatev2.png" 
 
+os.system("clear")                                          # Par souci de clareté, on efface le terminal en cours
 
-HOST = "10.100.252.90"  # Standard loopback interface address (localhost)
-PORT = 6789  # Port to listen on (non-privileged ports are > 1023)
-LIMIT_DATA = 1024
-
-
-def init():
-    os.system("clear")
-
-
-
-init()
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:    # On créer une socket 
     try:
         s.bind((HOST, PORT))
         s.listen()
@@ -30,15 +21,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             while True:
                 data = conn.recv(LIMIT_DATA)
                 if not data:
-                    log("Aucune donnée reçu ❌")
+                    log("Aucune donnée reçue ❌")
                     break
                 if "@" == data.decode('utf-8'):
-                    log("@ reçu en appel ✅")
+                    log("Signal @ reçu ✅")
                     try:
-                        takeImgFromPICam()
                         img = open(FILENAME,"rb")
                         b_img = img.read()
-                        log("Taille img ")
                         conn.sendall(b_img)
                         s.shutdown()
                         log("Image envoyée avec succès ✅, taille : " + len(b_img))
