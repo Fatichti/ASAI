@@ -86,6 +86,7 @@ def main():
     initZoneMatch = True
     while True:
         ret, frame = cam.read()
+        #
         if cv2.waitKey(25) & 0xFF == ord('q'):
             
             print("\n")
@@ -104,6 +105,8 @@ def main():
                 zoneDetection.coordX = coordROI[0]
                 zoneDetection.coordY = coordROI[1]
                 init = False
+
+            
 
             if MODE_MATCHING:
                 #imgToScan = frame[zoneDetection.coordY - zoneDetection.deltaY:zoneDetection.coordY + zoneDetection.hauteur + zoneDetection.deltaY,zoneDetection.coordX - zoneDetection.deltaX:zoneDetection.coordX + zoneDetection.largeur + zoneDetection.deltaX,:]
