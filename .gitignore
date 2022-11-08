@@ -1,0 +1,10 @@
+# On ne commit pas les fichiers cache de VSCODE
+__pycache__
+
+# On ne commit pas les gros fichiers et ceux associés, mais on indique plutôt un lien pour les télécharger
+## Fichier weight, lien : https://pjreddie.com/media/files/yolov3.weights
+yolov3.weights
+## Fichier cfg, lien : https://opencv-tutorial.readthedocs.io/en/latest/_downloads/10e685aad953495a95c17bfecd1649e5/yolov3.cfg
+yolov3.cfg
+## Fichier coco names, lien : https://opencv-tutorial.readthedocs.io/en/latest/_downloads/a9fb13cbea0745f3d11da9017d1b8467/coco.names
+coco.names
