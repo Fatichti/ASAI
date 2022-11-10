@@ -1,5 +1,4 @@
-# YOLO object detection
-import cv2 as cv
+import cv2 as cv                        # On importe toutes les librairies
 import numpy as np
 import time
 
@@ -14,26 +13,34 @@ PATH_DATA_FOLDER = "/home/fabienpi/Documents/UV_ASAI/data/yolo"
 YOLO_NAME = "yolov3.cfg"
 CAT_NAME = "coco.names"
 WEIGHTS_NAME = "yolov3.weights"
+IMAGE_TESTYOLO_NAME = "horse.jpg"               # Si on veut analyser sur une seul image (conseillé)
+USE_WEBCAM = False                              # Si on veut un flux vidéo en continu (non conseillé)
 
 
-# Load names of classes and get random colors
-classes = open(PATH_DATA_FOLDER + CAT_NAME).read().strip().split('\n')
+classes = open(PATH_DATA_FOLDER + CAT_NAME).read().strip().split('\n')      # On charge les noms des classes et obtenir des couleurs aléatoires
 np.random.seed(42)
 colors = np.random.randint(0, 255, size=(len(classes), 3), dtype='uint8')
 
 
-# Give the configuration and weight files for the model and load the network.
+# On spécifie les fichiers de configuration et de poids pour le modèle et charger le réseau.
 net = cv.dnn.readNetFromDarknet(PATH_DATA_FOLDER + YOLO_NAME, PATH_DATA_FOLDER + WEIGHTS_NAME)
-net.setPreferableBackend(cv.dnn.DNN_BACKEND_INFERENCE_ENGINE)
-#net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)
-#net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)
+#net.setPreferableBackend(cv.dnn.DNN_BACKEND_INFERENCE_ENGINE)              # Non terminée et fonctionnelle, ceci avait pour but d'utiliser le stick intel neural compute
+#net.setPreferableTarget(cv.dnn.DNN_TARGET_CPU)                             # Ce backend fonctionne
+net.setPreferableBackend(cv.dnn.DNN_BACKEND_OPENCV)                         # Ce backend fonctionne
 
 
-# determine the output layer
-ln = net.getLayerNames()
+ln = net.getLayerNames()                                                    # On détermine la couche de sortie
 
 ln = [ln[i[0] - 1] for i in net.getUnconnectedOutLayers()]
+
 def load_image(path):
+    """
+    fonction : load_image
+    paramètres : path [path]
+    valeur retour : aucune
+    description : 
+        1) on charge une image et on récupère l'analyse yolo
+    """                                                     
     global img, img0, outputs, ln
 
     img0 = cv.imread(path)
@@ -46,19 +53,21 @@ def load_image(path):
     outputs = net.forward(ln)
     t = time.time() - t0
 
-    # combine the 3 output groups into 1 (10647, 85)
-    # large objects (507, 85)
-    # medium objects (2028, 85)
-    # small objects (8112, 85)
     outputs = np.vstack(outputs)
 
     post_process(img, outputs, 0.5)
     cv.imshow('window', img)
-    #cv.displayOverlay('window', f'forward propagation time={t:.3}')
     cv.waitKey(0)
 
 
 def post_process(img, outputs, conf):
+    """
+    fonction : post_process
+    paramètres : img [tableau numpy], outputs [tableau 1D], conf [float]
+    valeur retour : aucune
+    description : 
+        1) on récupère des informations de l'analyse comme le score, la classe et les coordonées des objets détectés
+    """   
     H, W = img.shape[:2]
 
     boxes = []
@@ -73,10 +82,9 @@ def post_process(img, outputs, conf):
             x, y, w, h = output[:4] * np.array([W, H, W, H])
             p0 = int(x - w//2), int(y - h//2)
             p1 = int(x + w//2), int(y + h//2)
-            boxes.append([*p0, int(w), int(h)])
+            boxes.append([p0, int(w), int(h)])
             confidences.append(float(confidence))
             classIDs.append(classID)
-            # cv.rectangle(img, p0, p1, WHITE, 1)
             
     indices = cv.dnn.NMSBoxes(boxes, confidences, conf, conf-0.1)
     if len(indices) > 0:
@@ -90,15 +98,30 @@ def post_process(img, outputs, conf):
         
         
 def trackbar(x):
+    """
+    fonction : trackbar
+    paramètres : x [float]
+    valeur retour : aucune
+    description : 
+        1) on prépare les détections avec un seuil de confiance
+        2) on appelle l'étape de l'analyse des détections
+    """
     global img
     conf = x/100
     img = img0.copy()
     post_process(img, outputs, conf)
-    #cv.displayOverlay('window', f'confidence level={conf}')
     cv.imshow('window', img)
 
 
 def takeImgFromWebCam():
+    """
+    fonction : takeImgFromWebCam
+    paramètres : aucun
+    valeur retour : aucune
+    description : 
+        1) on peut récupéré un flux vidéos en continu au lieux d'une seul image (qui est par défaut)
+        2) on appelle l'étape de l'analyse des détections
+    """
     cap = cv.VideoCapture(URL_WEBCAM)
     while(True):
         ret, frame = cap.read()
@@ -110,9 +133,12 @@ def takeImgFromWebCam():
             cv.destroyAllWindows()
             break
 
-#takeImgFromWebCam()
-cv.namedWindow('window')
-cv.createTrackbar('confidence', 'window', 50, 100, trackbar)
 
-load_image(PATH_DATA_FOLDER + "horse.jpg")
-cv.destroyAllWindows()
+if USE_WEBCAM:
+    takeImgFromWebCam()
+else:                                  
+    cv.namedWindow('window')
+    cv.createTrackbar('confidence', 'window', 50, 100, trackbar)
+
+    load_image(PATH_DATA_FOLDER + IMAGE_TESTYOLO_NAME)
+    cv.destroyAllWindows()
