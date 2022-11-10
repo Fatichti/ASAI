@@ -1,63 +1,66 @@
 # General information
 - **UV** : ASAI
-- **Name** : Fabien Plouvier
-- **Date** : 10/10/2022 -> 09/11/2022 
-- **Video** : FAIRE VIDEO - [See here](https://www.youtube.com/watch?v=xlRoSH40MOg)  
+- **Name** : Fabien Plouvier 
+- **Date** : 10/10/2022 -> 09/11/2022
 
-📌This directory corresponds to the work done for my Automotive System & Embedded AI course.
+📌This branch of our Git repository corresponds to my work for AI recognition.
   
-# What is the context?
-
-## The specifications
-
-🛠️The main objectives of the course were :  
-
-- Use a Microchip dsPICDEM 2 card with the dsPIC30F microcontroller
-- Getting started with the ESP32 microcontroller
-- Develop recognition program on Raspberry Pi 4 - Yolo Python, OpenCV
-- Object / face tracing with EPS32 Servo and recognition on Raspberry
-
-## The tools available
-
-Our project is based on the programming of different cards [TurtleBot](http://kobuki.yujinrobot.com/about2/). 
-
-**The dsPICDEM 2 card :**   
-
-![dsPICDEM](data/gitReadme/dspic30f.jpg)  
-*[Specification here](https://www.microchip.com/en-us/development-tool/DM300018)*  
-
-**The Raspberry pi 4 card :**   
-
-![RaspberryPi4](data/gitReadme/raspPi4.jpg)  
-*[Specification here](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/)*  
-
-**The ESP32 microcontroller:**   
-
-![ESP32](data/gitReadme/esp32.jpeg)  
-*[Specification here](https://www.espressif.com/en/products/socs/esp32)*
+## What is the context?
+🛠️The specifications were :  
+1. The Pi Camera captures video in real time  
+2. Each frame is analysed by a Python program on the Raspberry
+3. The program is able to track an object in the camera
+4. A connected servo adjusts its viewing angle to focus on the traced object
+        
+## What are the tools available?
+**The KIT : Raspberry pi 4 card  + Servo + ESP32**  
+![KitRecognition](data/gitReadme/kitRecognition.gif)  
 
 
-For more details on how to use these tools and to view additional information such as installation information, **navigate to the different branches** (see below)
+## What is in the branch?
+To complete these specifications, I created the folder 📂 **"AIRecognition"** which contains the Python recognition script.
 
-# The organisation
+👀For a better understanding, here is **the tree structure** of this branch:  
+```bash
+├── readme.md
+├── data                                # The data necessary for the operation of the scripts and for the structure of the git
+│   ├── gitReadme                       # For the structure of the git
+│   ├── yolo                            # To get started with Yolo
+│   └── recognition                     # For the main recognition
+└── AIRecognition
+    ├── smartTracking.py                # Main program: camera + recognition + matching + servo
+    └── yolo.py                         # Program to get started with yolo
+```
 
-We divided the period into 4 weeks to handle each tool
+## How to install and run the scripts?
+⚠️To be able to use our work correctly, please follow the steps for **installing** and **running** the files/scripts.
 
-**Week 1 -> 2 :**  
-The goal is to get started with the Microship dsPICDEM 2 board.
+### Installation
 
-**Week 2 -> 3 :**  
-The goal is to perform MicroPython programming on the ESP32
-
-**Week 3 -> 4 :**  
-The goal is to develop a recognition program using the Raspberry Pi and the Pi Camera
-
-The work is organised in 3 branches as follows:  
-- MicroShip
-- ESP32
-- AI Recognition  
-
-To access them, do : 
+1. Clone the folder in your directory: 
 ```git
-git checkout branchname # for example : MicroShip or AI Recognition  
+git clone https://github.com/Fatichti/ASAI.git
+```
+
+2. Change the current git branch
+```git
+git checkout AI-Recognition
+```
+
+3. Install the yolo files (large files)  
+Links :
+    - [yolov3.weights](https://pjreddie.com/media/files/yolov3.weights)
+    - [yolov2.cfg](https://opencv-tutorial.readthedocs.io/en/latest/_downloads/10e685aad953495a95c17bfecd1649e5/yolov3.cfg)
+    - [coco.names](https://opencv-tutorial.readthedocs.io/en/latest/_downloads/a9fb13cbea0745f3d11da9017d1b8467/coco.names)  
+
+    And put them in ``data/yolo`` folder.  
+
+### Running
+After adjusting the parameters of the scripts, launch any Python script :
+```Bash
+python AIRecogntion/smartTracking.py    # To start the main recognition program
+```  
+Or  
+```Bash
+python AIRecogntion/yolo.py              # To test yolo on an image
 ```

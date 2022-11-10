@@ -18,7 +18,7 @@ MODE_AUTO_ADAPT_TEMPLATE = False
 MODE_SEND_AZIMUT = True
 
 
-PATH_DATA_FOLDER = "/home/fabienpi/Documents/UV_ASAI/data/"
+PATH_DATA_FOLDER = "/home/fabienpi/Documents/UV_ASAI/data/recognition/"
 OUTPUT_VIDEO_NAME = "video1.avi"
 TEMPLATE_IMG_NAME = "template.png"
 
