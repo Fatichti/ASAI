@@ -1,5 +1,6 @@
 # On ne commit pas les fichiers cache de VSCODE
 __pycache__
+.vscode
 
 # On ne commit pas les gros fichiers et ceux associés, mais on indique plutôt un lien pour les télécharger
 ## Fichier weight, lien : https://pjreddie.com/media/files/yolov3.weights
