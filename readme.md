@@ -1,8 +1,7 @@
 # General information
 - **UV** : ASAI
 - **Name** : Fabien Plouvier
-- **Date** : 10/10/2022 -> 09/11/2022 
-- **Video** : FAIRE VIDEO - [See here](https://www.youtube.com/watch?v=xlRoSH40MOg)  
+- **Date** : 10/10/2022 -> 09/11/2022
 
 📌This directory corresponds to the work done for my Automotive System & Embedded AI course.
   
@@ -19,7 +18,7 @@
 
 ## The tools available
 
-Our project is based on the programming of different cards [TurtleBot](http://kobuki.yujinrobot.com/about2/). 
+Our project is based on the programming of different cards. 
 
 **The dsPICDEM 2 card :**   
 
@@ -59,5 +58,5 @@ The work is organised in 3 branches as follows:
 
 To access them, do : 
 ```git
-git checkout branchname # for example : MicroShip or AI Recognition  
+git checkout branchname # for example : MicroShip or AI-Recognition  
 ```
