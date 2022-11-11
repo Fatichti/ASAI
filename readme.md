@@ -50,7 +50,8 @@ The **azimuth** is the angle formed by the difference in distance between the ce
 ![servo](data/gitReadme/servo.webp) 
 
 4) This results in efficient tracking of the moving object :  
-https://user-images.githubusercontent.com/74354655/201359108-23c9a8cd-4824-4418-acfe-98b1a366405d.mp4
+<video controls="" name="media"><source src="https://user-images.githubusercontent.com/74354655/201359108-23c9a8cd-4824-4418-acfe-98b1a366405d.mp4" type="video/mp4"></video>
+
 
 *[If the display does not work, click here](data/gitReadme/demoSmartTracking.mp4)*
 ⚠️ *The PiCamera is a NoIR camera (NoIR = No Infrared filter) which explains the particular colour shade*
