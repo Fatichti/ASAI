@@ -52,7 +52,7 @@ The goal is to perform MicroPython programming on the ESP32 and Raspberry Pi
 The goal is to develop a recognition program using the Raspberry Pi and the Pi Camera
 
 The work is organised in 3 branches as follows:  
-- MicroShip
+- Microhip
 - AI Recognition + ESP32  
 
 To access them, do : 
