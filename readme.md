@@ -57,5 +57,5 @@ The work is organised in 3 branches as follows:
 
 To access them, do : 
 ```git
-git checkout branchname # for example : MicroShip or AI-Recognition  
+git checkout branchname # for example : Microchip or AI-Recognition  
 ```
