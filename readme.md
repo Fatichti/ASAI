@@ -67,6 +67,7 @@ To complete these specifications, I created the folder 📂 **"AIRecognition"** 
 │   ├── yolo                            # To get started with Yolo
 │   └── recognition                     # For the main recognition
 └── AIRecognition
+    ├── esp32.py                        # Program to adapt the servo dynamically
     ├── smartTracking.py                # Main program: camera + recognition + matching + servo
     └── yolo.py                         # Program to get started with yolo
 ```
@@ -96,10 +97,17 @@ Links :
 
 ### Running
 After adjusting the parameters of the scripts, launch any Python script :
+
+1. On the hardware that collects the images (here the raspberry Pi)
 ```Bash
 python AIRecogntion/smartTracking.py    # To start the main recognition program
 ```  
-Or  
+Or 
 ```Bash
-python AIRecogntion/yolo.py              # To test yolo on an image
+python AIRecogntion/yolo.py             # To test yolo on an image
 ```
+
+2. On the hardware that handles the servo (here the ESP32)
+```Bash
+python AIRecogntion/esp32.py            # To start the main recognition program
+``` 

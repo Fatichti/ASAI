@@ -24,8 +24,8 @@ DISTANCE_FOCAL_CAM = 0.0036             # Distance focale de 3.6 mm, provenant d
 LARGEUR_PIXEL_CAM = 1.4 * pow(10, -6)   # Largeur d'un pixel de la caméra de 1.4 micrometre, provenant de la datasheet 
 
 if MODE_SEND_AZIMUT:
-    HOST = "10.100.252.207"                                     # Adresse IP du serveur d'écoute pour la socket
-    PORT = 6789                                                 # Port du serveur d'écoute pour la socket
+    HOST = "10.100.252.207"                                     # Adresse IP du serveur d'envoi pour la socket
+    PORT = 6789                                                 # Port du serveur d'envoi pour la socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)       # On créer une socket
     s.connect((HOST, PORT))                                     # On créer une connexion
 
