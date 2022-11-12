@@ -11,7 +11,7 @@ _FBORPOR(MCLR_EN & PWRT_OFF);
 _FGS(CODE_PROT_OFF);
 
 
-extern Delay5us(int);			// Temporisation multiple de "5µs"
+extern Delay5us(int);			// Temporisation multiple de "5ï¿½s"
 extern Delay5ms(int);			// Temporisation multiple de "5ms"
 
 
@@ -26,21 +26,24 @@ void init(void)
     LATB = 0x00;
 }
 
+
 void putD3On(void)
     {
-        PORTBbits.RB0 = 1;
-        
+        PORTBbits.RB0 = 1;  
     }
+
 
 void putD3Off(void)
     {
         PORTBbits.RB0 = 0;
     }
 
+
 void putD4On(void)
     {
         PORTBbits.RB1 = 1;
     }
+
 
 void putD4Off(void)
     {
@@ -53,6 +56,7 @@ void putAllOn(void)
         PORTBbits.RB0 = 1;
         PORTBbits.RB1 = 1;
     }
+
 
 void putAllOff(void)
     {
@@ -70,6 +74,7 @@ void checkS5Push(void)
         putD3Off();
     }
 }
+
 
 void checkS6Push(void)
 {
@@ -90,15 +95,8 @@ int main (void)
     
     while (1)              				//Main Loop of Code Executes forever
     {
-//        putD3On();
-//        Delay5ms(200);
-//        putAllOn();
-//        Delay5ms(200);
-//        putAllOff();
-//        Delay5ms(200); 
         checkS5Push();
         checkS6Push();
-
     } 
 	return 0;               			//Code never reaches here!
 }

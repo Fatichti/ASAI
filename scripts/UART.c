@@ -32,13 +32,10 @@ void UART2Init(void)
     IEC1bits.U2TXIE = 0;        //Enable transmit interrupt
     IFS1bits.U2TXIF = 0;
     
-    //Initialize valeur register à 0
+    //Initialize valeur register ï¿½ 0
     U2TXREG = 0;
     U2RXREG = 0;
-    
-   
 }
-
 
 
 // Function:UART2PutChar - This routine writes a character to the transmit FIFO
@@ -47,6 +44,7 @@ void UART2PutChar( unsigned char ch )
     while(U2STAbits.TRMT == 0);	// wait for transmit ready
     U2TXREG = ch;				// transmit character
 }
+
 
 void UART2ShowString(char *string)
 {

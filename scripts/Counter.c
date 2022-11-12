@@ -5,9 +5,10 @@
 #include "system.h"
 
 
-extern Delay5us(int);			// Temporisation multiple de "5µs"
+extern Delay5us(int);			// Temporisation multiple de "5ï¿½s"
 extern Delay5ms(int);			// Temporisation multiple de "5ms"
 int Counter = 0;
+
 
 void init(void)
 {
@@ -16,7 +17,7 @@ void init(void)
     LATAbits.LATA11 = 1;
     LATDbits.LATD8 = 1;
     
-    // Led bargraph ¨port F
+    // Led bargraph port F
     TRISF =0x00;
     LATF = 0x00;
 }
@@ -32,6 +33,7 @@ void checkS5Push(void)
         
     }
 }
+
 
 void checkS6Push(void)
 {

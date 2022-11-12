@@ -24,11 +24,9 @@ extern char UART2GetChar(void);
 extern void UART2PutChar(char);
 extern void UART2ShowString(char);
 
-// Fonction LED de LEC.c
-extern void d3flash(int);           // Flash LED D3 en ms
-
 int received;                       //Var pour check si on recoit une touche clavier
 int data;
+
 
 void init(void)
 {      
@@ -48,22 +46,12 @@ void __attribute__((__interrupt__))_U2RXInterrupt(void)
     IFS1bits.U2RXIF = 0;   
 }
 
-void printWelcomeMessageUART(void)
-{
-    unsigned int i,  data[]={0x4845,0x4c4c,0x4f0a,0x0d00};      //Envoyer message Hello
-    
-    for(i=0;i<sizeof(data)/sizeof(unsigned int);i++)
-    {
-		UART2PutChar((unsigned char)(data[i]>>8));  // send most significant byte
-		UART2PutChar((unsigned char) data[i]);         // send least significant byte
-	}
-}
-
 
 void showInfoSelectLed(void)
 {
     UART2ShowString("\n\n\rChoisir un numero de LED a afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
 }
+
 
 void selectLed(char *numLED)
 {
@@ -94,36 +82,26 @@ void selectLed(char *numLED)
 }
 
 
-
 int main (void)
 {
-    //init();
+    init();
     received=0;
     
     // On init UART :
     UART2Init();
 
-    // On flash une LED pour dire que tout est initialis�
-    //d3flash(2000);
-    
-    // On affiche un message de bienvenue en UART
-    //printWelcomeMessageUART();
-    UART2ShowString("\rBienvenu,\n\n\rR�gles d'utilisation : \n\rChoisir un numero de LED a afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
+    UART2ShowString("\rBienvenu,\n\n\rRegles d'utilisation : \n\rChoisir un numero de LED a afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
     
     while (1)              				//Main Loop of Code Executes forever
     {
         if(received==1){
-            //UART2PutChar(data);
-            //U2TXREG = data;
+            UART2PutChar(data);
             selectLed(data);
             received=0;
         }
     } 
 	return 0;               			//Code never reaches here!
 }
-
-
-
 
 
 //END of program

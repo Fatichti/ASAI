@@ -12,7 +12,7 @@ _FBORPOR(MCLR_EN & PWRT_OFF);
 _FGS(CODE_PROT_OFF);
 
 
-extern Delay5us(int);			// Temporisation multiple de "5µs"
+extern Delay5us(int);			// Temporisation multiple de "5ï¿½s"
 extern Delay5ms(int);			// Temporisation multiple de "5ms"
 int delayDisplay = 40;
 int sensLED = -1;               // sens = -1 -> rien, init, sens = 0 -> vers la gauche, sens = 1 -> vers la droite
@@ -20,7 +20,7 @@ int PRI = 60000;                //Register every 20ms
 
 void init(void)
 {   
-    // Led bargraph ¨port F
+    // Led bargraph port F
     TRISF = 0x00;
     LATF = 0x00;
     
@@ -60,11 +60,11 @@ void initLEDBeforeChaser(void)
 
 int checkWhichPushButtons(void)
 {
-    if(!(PORTDbits.RD8 == 0)){      // Si S6 push -> à droite
+    if(!(PORTDbits.RD8 == 0)){      // Si S6 push -> a droite
         PORTBbits.RB1 = 1;
         return 1;
     }
-    else if(!(PORTAbits.RA11 == 0)){    // Si S5 push -> à gauche
+    else if(!(PORTAbits.RA11 == 0)){    // Si S5 push -> a gauche
         PORTBbits.RB0 = 1;
         return 0;
     }else{
@@ -72,6 +72,7 @@ int checkWhichPushButtons(void)
     }
     
 }
+
 
 void chaser(void)            
 {
@@ -134,6 +135,7 @@ void __attribute__((__interrupt__, __auto_psv__))_INT0Interrupt(void)
     IFS0bits.INT0IF=0;
 }
 
+
 void __attribute__((__interrupt__, __auto_psv__))_INT1Interrupt(void)
 {
     // Toggle LED RB0 off
@@ -149,6 +151,7 @@ void __attribute__((__interrupt__, __auto_psv__))_INT1Interrupt(void)
     IFS1bits.INT1IF=0;
 }
 
+
 int main (void)
 {
 
@@ -161,7 +164,6 @@ int main (void)
     while (1)              				//Main Loop of Code Executes forever
     {
         chaser();
-        //test();
 
     } 
 	return 0;               			//Code never reaches here!
