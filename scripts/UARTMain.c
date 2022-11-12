@@ -13,7 +13,7 @@ _FBORPOR(MCLR_EN & PWRT_OFF);
 _FGS(CODE_PROT_OFF);
 
 
-extern void Delay5us(int);			// Temporisation multiple de "5µs"
+extern void Delay5us(int);			// Temporisation multiple de "5ï¿½s"
 extern void Delay5ms(int);			// Temporisation multiple de "5ms"
 
 
@@ -62,7 +62,7 @@ void printWelcomeMessageUART(void)
 
 void showInfoSelectLed(void)
 {
-    UART2ShowString("\n\n\rChoisir un numéro de LED à afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
+    UART2ShowString("\n\n\rChoisir un numero de LED a afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
 }
 
 void selectLed(char *numLED)
@@ -88,7 +88,7 @@ void selectLed(char *numLED)
         PORTBbits.RB1 = 0;
     }else
     {
-        UART2ShowString("\n\rErreur : numéro de LED incorrect (valeur possible : 3 ou 4), veuillez ressayer.");
+        UART2ShowString("\n\rErreur : numero de LED incorrect (valeur possible : 3 ou 4), veuillez ressayer.");
     }
     showInfoSelectLed();
 }
@@ -103,12 +103,12 @@ int main (void)
     // On init UART :
     UART2Init();
 
-    // On flash une LED pour dire que tout est initialisé
+    // On flash une LED pour dire que tout est initialisï¿½
     //d3flash(2000);
     
     // On affiche un message de bienvenue en UART
     //printWelcomeMessageUART();
-    UART2ShowString("\rBienvenu,\n\n\rRègles d'utilisation : \n\rChoisir un numéro de LED à afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
+    UART2ShowString("\rBienvenu,\n\n\rRï¿½gles d'utilisation : \n\rChoisir un numero de LED a afficher :\n\r- 3 : LED D3\n\r- 4 : LED D4\n\n\rChoix : ");
     
     while (1)              				//Main Loop of Code Executes forever
     {
